@@ -2073,6 +2073,9 @@ static int init_complex_filters(void)
     int i, ret = 0;
 
     for (i = 0; i < nb_filtergraphs; i++) {
+        if (filtergraphs[i]->graph_desc == NULL) {
+            continue;
+        }
         ret = init_complex_filtergraph(filtergraphs[i]);
         if (ret < 0)
             return ret;

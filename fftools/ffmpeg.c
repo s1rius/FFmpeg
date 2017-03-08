@@ -642,13 +642,14 @@ void remove_avoptions(AVDictionary **a, AVDictionary *b)
     }
 }
 
-void assert_avoptions(AVDictionary *m)
+int assert_avoptions(AVDictionary *m)
 {
     AVDictionaryEntry *t;
     if ((t = av_dict_get(m, "", NULL, AV_DICT_IGNORE_SUFFIX))) {
         av_log(NULL, AV_LOG_FATAL, "Option %s not found.\n", t->key);
-        exit_program(1);
+        return -1;
     }
+    return 0;
 }
 
 static void abort_codec_experimental(AVCodec *c, int encoder)
